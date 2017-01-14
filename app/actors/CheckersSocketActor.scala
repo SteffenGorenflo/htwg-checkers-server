@@ -8,9 +8,17 @@ import akka.actor.Actor.Receive
   */
 object CheckersSocketActor {
   def props(out: ActorRef, controller: ActorRef): Props = Props(new CheckersSocketActor(out, controller))
-
 }
 
 class CheckersSocketActor(val wsOut: ActorRef, val checkersController: ActorRef) extends Actor {
-  override def receive: Receive = ???
+  override def receive: Receive = {
+    case msg: String =>
+      wsOut ! ("I received your message: " + msg)
+  }
+
+
+  override def postStop: Unit = {
+   // TODO:
+    // someResource.close()
+  }
 }
