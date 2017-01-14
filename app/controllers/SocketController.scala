@@ -7,6 +7,7 @@ import actors.CheckersSocketActor
 import akka.actor.{ActorRef, ActorSystem, Props}
 import akka.event.Logging
 import akka.stream.Materializer
+import play.api.libs.json.JsValue
 import play.api.mvc._
 import play.api.libs.streams._
 import sun.util.logging.resources.logging
@@ -19,7 +20,7 @@ import scala.concurrent.duration.Duration
   */
 class SocketController @Inject()(implicit system: ActorSystem, materializer: Materializer) extends Controller {
 
-  def socket: WebSocket = WebSocket.accept[String, String] { request =>
+  def socket: WebSocket = WebSocket.accept[JsValue, JsValue] { request =>
 
     val actorPath = "" // TODO:
 
