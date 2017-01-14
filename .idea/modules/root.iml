@@ -30,6 +30,21 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="SBT: aopalliance:aopalliance:1.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.uncommons.maths:uncommons-maths:1.2.2a:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scaldi:scaldi_2.11:0.4:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.2:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang:scala-swing:2.11.0-M7:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.8:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang:scala-compiler:2.11.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.agrona:Agrona:0.5.5:jar" level="project" />
+    <orderEntry type="library" name="SBT: io.netty:netty:3.10.6.Final:jar" level="project" />
+    <orderEntry type="library" name="SBT: io.aeron:aeron-driver:1.0.2:jar" level="project" />
+    <orderEntry type="library" name="SBT: io.aeron:aeron-client:1.0.2:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.typesafe.akka:akka-remote_2.11:2.4.12:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.typesafe.akka:akka-protobuf_2.11:2.4.12:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.sksamuel.scapegoat:scalac-scapegoat-plugin_2.11:1.0.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.escalatesoft.subcut:subcut_2.11:2.1:jar" level="project" />
+    <orderEntry type="module" module-name="htwg-scala-checkers" exported="" />
     <orderEntry type="library" name="SBT: xml-apis:xml-apis:1.4.01:jar" level="project" />
     <orderEntry type="library" name="SBT: xerces:xercesImpl:2.11.0:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: xalan:xalan:2.7.2:jar" level="project" />
@@ -55,12 +70,9 @@
     <orderEntry type="library" scope="TEST" name="SBT: org.scalatest:scalatest_2.11:2.2.6:jar" level="project" />
     <orderEntry type="library" name="SBT: org.scala-stm:scala-stm_2.11:0.7:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-sbt:test-interface:1.0:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.2:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.1:jar" level="project" />
     <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4:jar" level="project" />
     <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-java8-compat_2.11:0.7.0:jar" level="project" />
     <orderEntry type="library" name="SBT: org.scala-lang:scala-reflect:2.11.7:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.7:jar" level="project" />
     <orderEntry type="library" name="SBT: org.reactivestreams:reactive-streams:1.0.0:jar" level="project" />
     <orderEntry type="library" name="SBT: org.joda:joda-convert:1.8.1:jar" level="project" />
     <orderEntry type="library" name="SBT: org.javassist:javassist:3.20.0-GA:jar" level="project" />
@@ -102,7 +114,6 @@
     <orderEntry type="library" name="SBT: io.netty:netty-codec-http:4.0.41.Final:jar" level="project" />
     <orderEntry type="library" name="SBT: io.netty:netty-codec:4.0.41.Final:jar" level="project" />
     <orderEntry type="library" name="SBT: io.netty:netty-buffer:4.0.41.Final:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: io.netty:netty:3.5.2.Final:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: commons-logging:commons-logging:1.2:jar" level="project" />
     <orderEntry type="library" name="SBT: commons-logging:commons-logging:1.1.1:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: commons-io:commons-io:2.4:jar" level="project" />

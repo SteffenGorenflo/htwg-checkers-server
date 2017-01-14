@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="htwg-scala-checkers" external.linked.project.path="$MODULE_DIR$/../../../htwg-scala-checkers" external.root.project.path="$MODULE_DIR$/../.." external.system.id="SBT" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/../../../htwg-scala-checkers/target/scala-2.11/classes" />
+    <output-test url="file://$MODULE_DIR$/../../../htwg-scala-checkers/target/scala-2.11/test-classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../htwg-scala-checkers">
+      <sourceFolder url="file://$MODULE_DIR$/../../../htwg-scala-checkers/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../htwg-scala-checkers/src/main/scala" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../htwg-scala-checkers/src/main/scala-2.11" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../htwg-scala-checkers/target/scala-2.11/src_managed/main" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../htwg-scala-checkers/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../htwg-scala-checkers/src/test/scala" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../htwg-scala-checkers/src/test/scala-2.11" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../htwg-scala-checkers/target/scala-2.11/src_managed/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../htwg-scala-checkers/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../htwg-scala-checkers/target/scala-2.11/resource_managed/main" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../htwg-scala-checkers/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../htwg-scala-checkers/target/scala-2.11/resource_managed/test" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../htwg-scala-checkers/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="SBT: com.escalatesoft.subcut:subcut_2.11:2.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.uncommons.maths:uncommons-maths:1.2.2a:jar" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="SBT: org.scoverage:scalac-scoverage-runtime_2.11:1.1.1:jar" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="SBT: org.scoverage:scalac-scoverage-plugin_2.11:1.1.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scaldi:scaldi_2.11:0.4:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scalatest:scalatest_2.11:3.0.0-M15:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scalamock:scalamock-scalatest-support_2.11:3.2.2:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scalamock:scalamock-core_2.11:3.2.2:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scalactic:scalactic_2.11:3.0.0-M15:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.2:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-java8-compat_2.11:0.7.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang:scala-swing:2.11.0-M7:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang:scala-reflect:2.11.7:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang:scala-reflect:2.11.6:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.8:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang:scala-compiler:2.11.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.reactivestreams:reactive-streams:1.0.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.agrona:Agrona:0.5.5:jar" level="project" />
+    <orderEntry type="library" name="SBT: io.netty:netty:3.10.6.Final:jar" level="project" />
+    <orderEntry type="library" name="SBT: io.aeron:aeron-driver:1.0.2:jar" level="project" />
+    <orderEntry type="library" name="SBT: io.aeron:aeron-client:1.0.2:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.typesafe.akka:akka-stream_2.11:2.4.12:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.typesafe.akka:akka-remote_2.11:2.4.12:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.typesafe.akka:akka-protobuf_2.11:2.4.12:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.typesafe.akka:akka-actor_2.11:2.4.12:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.typesafe:ssl-config-core_2.11:0.2.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.typesafe:config:1.3.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.sksamuel.scapegoat:scalac-scapegoat-plugin_2.11:1.0.0:jar" level="project" />
+  </component>
+</module>

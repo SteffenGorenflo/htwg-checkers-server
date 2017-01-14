@@ -1,8 +1,8 @@
 package actors
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
-import akka.actor.Actor.Receive
-import akka.event.Logging
+import de.htwg.se.checkers.controller.CreateUpdateUI
+import play.api.libs.json.Json
 
 /**
   * Created by steffen on 14/01/2017.
@@ -18,11 +18,20 @@ class CheckersSocketActor(val wsOut: ActorRef, val checkersController: ActorRef)
   }
 
 
-  override def receive: Receive = {
+  override def receive = {
+
+    // message from controller
+    case update: CreateUpdateUI =>
+
     case msg: String =>
       log.info("received...")
       log.info(msg)
       wsOut ! ("I received your message: " + msg)
+
+    case unknownMessage@_ => {
+      println(s"unknown message: $unknownMessage")
+      wsOut ! Json.toJson(unknownMessage)
+    }
   }
 
 
