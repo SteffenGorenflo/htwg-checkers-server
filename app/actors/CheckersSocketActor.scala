@@ -1,9 +1,8 @@
 package actors
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
-import de.htwg.se.checkers.controller.CreateUpdateUI
+import de.htwg.se.checkers.model.GameState
 import play.api.libs.json.{JsValue, Json}
-import Util.Utils._
 
 /**
   * Created by steffen on 14/01/2017.
@@ -15,24 +14,27 @@ object CheckersSocketActor {
 class CheckersSocketActor(val wsOut: ActorRef, val checkersController: ActorRef) extends Actor with ActorLogging {
 
   override def preStart: Unit = {
-    log.debug("Starting")
+    log.info("Starting")
   }
 
+  implicit val updateFormat = Json.format[GameState]
 
   override def receive: Receive = {
 
     // message from controller
-    case update: CreateUpdateUI => wsOut ! Json.toJson("HI")
+    case update: GameState => wsOut ! Json.toJson(update)
 
 
     case json: JsValue => json match {
 
-        // TODO: distinguish json messages
+      // TODO: distinguish json messages
       case unknownMessage@_ => {
         log.info(s"unknown message: $unknownMessage")
         wsOut ! Json.toJson(unknownMessage)
       }
     }
+    case default@_ => log.info(s"unkown message: $default from " + sender())
+
   }
 
 
