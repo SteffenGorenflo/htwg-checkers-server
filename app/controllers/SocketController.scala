@@ -4,13 +4,11 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 import actors.CheckersSocketActor
-import akka.actor.{ActorRef, ActorSystem, Props}
-import akka.event.Logging
+import akka.actor.ActorSystem
 import akka.stream.Materializer
 import play.api.libs.json.JsValue
-import play.api.mvc._
 import play.api.libs.streams._
-import sun.util.logging.resources.logging
+import play.api.mvc._
 
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
@@ -22,15 +20,13 @@ class SocketController @Inject()(implicit system: ActorSystem, materializer: Mat
 
   def socket: WebSocket = WebSocket.accept[JsValue, JsValue] { request =>
 
-    val actorPath = "" // TODO:
+    val actorPath = "akka.tcp://checkers@127.0.0.1:2552/user/controller"
 
-    //    // let the system retrieve the controller actor
-    //    val selection = system.actorSelection(actorPath)
-    //    implicit val timeout = akka.util.Timeout(5, TimeUnit.SECONDS)
-    //    val controller = Await.result(selection.resolveOne(), Duration.Inf)
+    // let the system retrieve the controller actor
+    val selection = system.actorSelection(actorPath)
+    implicit val timeout = akka.util.Timeout(5, TimeUnit.SECONDS)
+    val controller = Await.result(selection.resolveOne(), Duration.Inf)
 
-    val controller1 = Props[MyActor]
-    val controller = system.actorOf(controller1)
 
     ActorFlow.actorRef(out => CheckersSocketActor.props(out, controller))
   }

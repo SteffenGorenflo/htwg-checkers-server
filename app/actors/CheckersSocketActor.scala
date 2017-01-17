@@ -1,6 +1,7 @@
 package actors
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
+import de.htwg.se.checkers.controller.RegisterUI
 import de.htwg.se.checkers.model.api.Coord
 import de.htwg.se.checkers.model.{GameState, Piece}
 import play.api.libs.json.{JsObject, JsValue, Json, Writes}
@@ -14,6 +15,8 @@ object CheckersSocketActor {
 
 class CheckersSocketActor(val wsOut: ActorRef, val checkersController: ActorRef) extends Actor with ActorLogging {
 
+  checkersController ! RegisterUI
+
   override def preStart: Unit = {
     log.info("Starting")
   }
@@ -22,8 +25,13 @@ class CheckersSocketActor(val wsOut: ActorRef, val checkersController: ActorRef)
   override def receive: Receive = {
 
     // message from controller
-    case update: GameState => wsOut ! Json.toJson(transform(update))
+    case update: GameState =>
+      val json = transform(update)
+      log.info("getting")
+      log.info(json.toString)
+      wsOut ! Json.toJson(json)
 
+    // message from websocket
     case json: JsValue => json match {
 
 
