@@ -2,8 +2,9 @@ package actors
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import de.htwg.se.checkers.controller.RegisterUI
+import de.htwg.se.checkers.model._
 import de.htwg.se.checkers.model.api.Coord
-import de.htwg.se.checkers.model.{GameState, Piece}
+import de.htwg.se.checkers.model.enumeration.Colour
 import play.api.libs.json.{JsObject, JsValue, Json, Writes}
 
 /**
@@ -24,12 +25,12 @@ class CheckersSocketActor(val wsOut: ActorRef, val checkersController: ActorRef)
 
   override def receive: Receive = {
 
-    // message from controller
-    case update: GameState =>
-      val json = transform(update)
-      log.info("getting")
-      log.info(json.toString)
-      wsOut ! Json.toJson(json)
+    // messages from controller
+    case currentPlayer: Colour.Value => wsOut ! Json.toJson(currentPlayer)
+    case possibleMoves: Moves => wsOut ! Json.toJson(possibleMoves)
+    case possiblePieces: Origins => wsOut ! Json.toJson(possiblePieces)
+    case possibleTargets: Targets => wsOut ! Json.toJson(possibleTargets)
+    case update: GameState => wsOut ! Json.toJson(transform(update))
 
     // message from websocket
     case json: JsValue => json match {
@@ -87,9 +88,24 @@ class CheckersSocketActor(val wsOut: ActorRef, val checkersController: ActorRef)
     )
   }
 
+  implicit val jsonPossibleMoves = new Writes[(Coord, Coord)] {
+    def writes(piecePiece: (Coord, Coord)): JsObject = Json.obj(
+      "origin" -> Json.toJson(piecePiece._1),
+      "target" -> Json.toJson(piecePiece._2)
+    )
+  }
+
   implicit val coordWrites = new Writes[Seq[(Coord, Piece)]] {
     override def writes(o: Seq[(Coord, Piece)]): JsValue = Json.toJson(o)
   }
 
+  implicit val moveWrites = new Writes[Seq[(Coord, Coord)]] {
+    override def writes(o: Seq[(Coord, Coord)]): JsValue = Json.toJson(o)
+  }
+
+
   implicit val updateWrite = Json.writes[GameStateJson]
+  implicit val movesWrite = Json.writes[Moves]
+  implicit val targetsWrite = Json.writes[Targets]
+  implicit val originsWrite = Json.writes[Origins]
 }
