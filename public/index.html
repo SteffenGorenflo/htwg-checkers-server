@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTWG-Checkers</title>
+
+    <link href="stylesheets/style.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+<div id="title" class="center">HTWG
+    <div class="subtitle">Checkers</div>
+    <div class="button">
+        <button id="button" class='imgButton'>NEW GAME</button>
+    </div>
+    <div id="gameinfo" class="game-info">
+    </div>
+</div>
+
+<div class="center field-container">
+    <div id="0" class="row">
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+    </div>
+    <div id="1" class="row">
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+    </div>
+    <div id="2" class="row">
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+    </div>
+    <div id="3" class="row">
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+    </div>
+    <div id="4" class="row">
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+    </div>
+    <div id="5" class="row">
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+    </div>
+    <div id="6" class="row">
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+    </div>
+    <div id="7" class="row">
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+        <div class="field even"></div>
+        <div class="field uneven"></div>
+    </div>
+</div>
+
+<script>
+    var wsUri = "ws://localhost:9000/socket";
+
+    // playfield infos
+    var playfield = [];
+    var currentplayer;
+    var possibleTargets = [];
+    var possibleMoves = [];
+    var possibleOrigins = [];
+    var selected;
+
+    // images
+    const black = '<img src="images/BLACK.png">';
+    const white = '<img src="images/WHITE.png">';
+
+
+    var websocket;
+
+    // websocket messages
+    // queries
+    //    websocket.send(JSON.stringify({query: "getcurrentplayer"}));
+    //
+    //    websocket.send(JSON.stringify({query: "getmoves"}));
+    //
+    //    // execute
+    //    websocket.send(JSON.stringify({execute: "quitgame"}));
+    //    websocket.send(JSON.stringify({execute: "newgame"}));
+    //    websocket.send(JSON.stringify({execute: "setpiece", x1: 1, y1: 1, x2: 2, y2: 2}));
+
+
+    $(document).ready(function () {
+
+        // init websocket
+        websocket = new WebSocket(wsUri);
+        websocket.onopen = socketFunction.onOpen;
+        websocket.onclose = socketFunction.onClose;
+        websocket.onmessage = socketFunction.onMessage;
+        websocket.onerror = socketFunction.onError;
+    });
+
+    var mainFunction = function () {
+
+        $('.field').on('click', function (event) {
+
+
+            // first get the coordinates
+            var elem = $(this);
+            var index = checkersIndex(elem);
+
+            if (contains(index, possibleOrigins)) {
+                // mark piece
+                getPossibleTargets(index);
+                removeAllMarked();
+                elem.toggleClass('marked');
+                selected = index
+            } else if (contains(index, possibleTargets)) {
+                // move piece
+                movePiece(selected, index);
+            }
+
+
+        });
+
+        $('.field').mouseenter(function () {
+            var elem = $(this);
+            var index = checkersIndex(elem);
+            if (contains(index, possibleOrigins)) {
+                elem.addClass('highlight')
+            }
+        }).mouseleave(function () {
+            $(this).removeClass('highlight')
+        });
+
+        $('#button').on('click', function () {
+            websocket.send(JSON.stringify({execute: "newgame"}));
+        })
+    };
+
+
+    function update() {
+        $('img').remove();
+        $('div').removeClass('marked');
+        playfield.forEach(function (field) {
+            $(jQueryIndex(field.pos.x, field.pos.y))
+                .append(field.piece.colour === 'Black' ? black : white);
+        });
+        websocket.send(JSON.stringify({query: "getmoves"}));
+        websocket.send(JSON.stringify({query: "getcurrentplayer"}));
+    }
+
+
+    var socketFunction = {
+        onOpen: mainFunction,
+        onError: function (event) {
+            console.error('Websocket Error', event);
+        },
+        onClose: function (event) {
+            console.log('Websockets closed', event)
+        },
+        onMessage: function (event) {
+            var data = JSON.parse(event.data);
+
+            if (data.moves) {
+                possibleMoves = data.moves;
+                retrievePossibleOrigins();
+            } else if (data.vector) {
+                playfield = data.vector;
+                update();
+            } else if (data.origins) {
+                possibleOrigins = data.origins;
+            } else if (data.targets) {
+                unmarkTargets();
+                possibleTargets = data.targets;
+                markTargets();
+            } else if (data === 'Black' || data === 'White') {
+                currentplayer = data;
+                displayCurrentPlayer();
+            } else {
+                console.log("Got unkown message", data);
+            }
+        }
+    };
+
+    var jQueryIndex = function (x, y) {
+        return '#' + x + ' div:nth-child(' + (y + 1) + ')'
+    };
+
+    var markTargets = function () {
+        possibleTargets.forEach(function (field) {
+            $(jQueryIndex(field.x, field.y)).addClass('marked')
+        });
+    };
+
+    var unmarkTargets = function () {
+        possibleTargets.forEach(function (field) {
+            $(jQueryIndex(field.x, field.y)).removeClass('marked')
+        });
+    };
+
+
+    var checkersIndex = function (elem) {
+        var reval = {};
+        reval.x = parseInt(elem.parent().attr('id'));
+        reval.y = elem.index();
+        return reval;
+    };
+
+    var removeAllMarked = function () {
+        possibleOrigins.forEach(function (elem) {
+            $(jQueryIndex(elem.x, elem.y)).removeClass('marked');
+        })
+    };
+
+    var retrievePossibleOrigins = function () {
+        possibleOrigins = [];
+        possibleMoves.forEach(function (move) {
+            possibleOrigins.push(move.origin);
+        })
+    };
+
+    var getPossibleTargets = function (index) {
+        index.query = 'getpossibletargets';
+        websocket.send(JSON.stringify(index));
+    };
+
+    var movePiece = function (from, to) {
+        var execute = {execute: "setpiece"};
+        execute.x1 = from.x;
+        execute.y1 = from.y;
+        execute.x2 = to.x;
+        execute.y2 = to.y;
+
+        websocket.send(JSON.stringify(execute));
+    };
+
+    var displayCurrentPlayer = function () {
+        $('#gameinfo').text("Current player: " + currentplayer)
+    };
+
+
+    var contains = function (field, listOfFields) {
+        return listOfFields.some(function (elem) {
+            return (elem.x === field.x && elem.y === field.y);
+        })
+    }
+
+</script>
+</body>
+</html>

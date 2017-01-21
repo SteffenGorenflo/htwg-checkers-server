@@ -1,0 +1,106 @@
+.center {
+    margin: 0 auto;
+    display: table;
+    float: left;
+    background-color: transparent;
+}
+
+.field-container {
+    border: 8px ridge #2793e8;
+    width: 480px;
+    height: 480px;
+    box-shadow: 25px 25px 12px #888;
+    margin-top: 60px;
+    margin-left: 20px;
+}
+
+.game-info {
+    margin-top: 40px;
+    margin-left: 40px;
+    font-size: 25px;
+    font-family: "Times New Roman";
+}
+
+#title {
+    margin-top: 60px;
+    margin-bottom: 40px;
+    margin-left: 20px;
+    font-size: 50px;
+    font-family: Arial;
+    font-weight: bold;
+    width: 30%
+}
+
+.button {
+    margin-top: 30px;
+    margin-left: 60px;
+}
+
+button {
+    line-height: 50px;
+    width: 200px;
+}
+
+button.imgButton {
+    color: black;
+    font-size: 20px;
+    background-size: cover;
+    border-radius: 20px;
+    background: url("../images/button.png");
+    background-size: cover; /* <-- scale the image to cover the button */
+    background-position: center center; /* <-- center the image in the button */
+}
+
+.subtitle {
+    padding-left: 40px;
+    padding-top: 10px;
+    font-style: oblique;
+    font-family: AppleGothic;
+    color: saddlebrown;
+    letter-spacing: 3px;
+    font-size: 60px;
+}
+
+.row {
+    width: 60px;
+    height: 480px;
+    float: left;
+}
+
+.field {
+    height: 60px;
+    width: inherit;
+}
+
+.highlight {
+    background-color: #88C400 !important;
+}
+
+.marked {
+    background-color: #88C400 !important;
+}
+
+.uneven {
+    background-color: white;
+}
+
+.even {
+    background-color: #6b6b6b;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-repeat: no-repeat;
+    background: linear-gradient(red, orange, yellow, green, cyan, blue, magenta);
+    margin: 0;
+}
+
+img {
+    max-width: 80%;
+    max-height: 80%;
+    padding: 10%
+}
