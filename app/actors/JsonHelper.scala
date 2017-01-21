@@ -1,8 +1,8 @@
 package actors
 
-import de.htwg.se.checkers.model.Piece
-import de.htwg.se.checkers.model.api.Coord
-import de.htwg.se.checkers.model.enumeration.Colour
+import src.main.scala.de.htwg.se.checkers.model.Piece
+import src.main.scala.de.htwg.se.checkers.model.api.Coord
+import src.main.scala.de.htwg.se.checkers.model.enumeration.Colour
 
 /**
   * Created by steffen on 16/01/2017.

@@ -3,13 +3,13 @@ package actors
 import java.util.concurrent.TimeUnit
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
-import de.htwg.se.checkers.controller.{DeregisterUI, RegisterUI}
-import de.htwg.se.checkers.model._
-import de.htwg.se.checkers.model.api.Coord
-import de.htwg.se.checkers.model.enumeration.Colour
-import play.api.libs.json._
 import akka.pattern.ask
-import de.htwg.se.checkers.controller.command._
+import play.api.libs.json._
+import src.main.scala.de.htwg.se.checkers.controller.command._
+import src.main.scala.de.htwg.se.checkers.controller.{DeregisterUI, RegisterUI}
+import src.main.scala.de.htwg.se.checkers.model._
+import src.main.scala.de.htwg.se.checkers.model.api.Coord
+import src.main.scala.de.htwg.se.checkers.model.enumeration.Colour
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -91,7 +91,7 @@ class CheckersSocketActor(val wsOut: ActorRef, val checkersController: ActorRef)
   def transformExecute(execute: String, json: JsValue): Any = {
     execute.toLowerCase match {
       case "quitgame" => Execute(QuitGame)
-      case "newgame" => Execute(NewGame)
+      case "newgame" => Execute(new NewGame())
       case "setpiece" =>
         val x1: Int = (json \ "x1").validate[Int].getOrElse(-1)
         val y1: Int = (json \ "y1").validate[Int].getOrElse(-1)
