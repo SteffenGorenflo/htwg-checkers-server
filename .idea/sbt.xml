@@ -9,8 +9,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/project" />
-            <option value="$PROJECT_DIR$/../htwg-scala-checkers" />
-            <option value="$PROJECT_DIR$/../htwg-scala-checkers/project" />
           </set>
         </option>
         <option name="sbtVersion" value="0.13.11" />

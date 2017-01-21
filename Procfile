@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/htwg-checkers-server
+web: target/universal/stage/bin/htwg-checkers-server Dhttp.port=80
