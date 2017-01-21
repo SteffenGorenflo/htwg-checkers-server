@@ -27,8 +27,6 @@ class SocketController @Inject()(implicit system: ActorSystem, materializer: Mat
 
 
     val actorPath = "/user/controller"
-//system.actorSelection(actorPath);
-    // let the system retrieve the controller actor
     val selection = system.actorSelection(actorPath)
     val controller = Await.result(selection.resolveOne(), Duration.Inf)
 
