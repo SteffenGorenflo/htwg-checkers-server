@@ -91,7 +91,7 @@ class CheckersSocketActor(val wsOut: ActorRef, val checkersController: ActorRef)
   def transformExecute(execute: String, json: JsValue): Any = {
     execute.toLowerCase match {
       case "quitgame" => Execute(QuitGame)
-      case "newgame" => Execute(NewGame)
+      case "newgame" => Execute(new NewGame())
       case "setpiece" =>
         val x1: Int = (json \ "x1").validate[Int].getOrElse(-1)
         val y1: Int = (json \ "y1").validate[Int].getOrElse(-1)
