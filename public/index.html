@@ -103,7 +103,8 @@
 </div>
 
 <script>
-    var wsUri = "ws://localhost:80/socket";
+    var host = location.origin.replace(/^http/, 'ws');
+    var wsUri = host + '/socket';
 
     // playfield infos
     var playfield = [];
